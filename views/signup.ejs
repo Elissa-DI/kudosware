@@ -1,0 +1,62 @@
+<%- include('partials/header'); -%>
+
+     <!-- <h2>Sign up</h2>
+     <label for="email">Email</label>
+     <input type="text" name="email" required>
+     <div class="email error"></div>
+
+     
+     <label for="password">password</label>
+     <input type="password" name="password" required>
+     <div class="password error"></div>
+     <button type="submit" class="btn btn-primary">Sign up</button> -->
+
+
+     <div class="container-fluid">
+       <div class="container" style="box-shadow: 0 0 2px black; height: 100vh; width: 80vw; padding: 20px;">
+          <form action="" method="POST" style="width:50vw; min-width:300px;">
+             <div class="row">
+                <div class="col">
+                  <label class="form-label">First Name:</label>
+                  <input type="text" class="form-control" name="fname" placeholder="Elissa">
+                </div>
+                <div class="col">
+                  <label class="form-label">Last Name:</label>
+                  <input type="text" class="form-control" name="lname" placeholder="DUSABE">
+                </div>
+             </div>
+             <div>
+                <label class="form-label">Email:</label>
+                <input type="text" class="form-control" name="email" placeholder="name@example.com">
+              </div>
+  
+              <div>
+                 <label class="form-label">Password: </label>
+                 <input type="password" class="form-control" name="password" placeholder="Enter your Password">
+                </div>
+               <div>
+                 <label class="form-label">Number: </label>
+                 <input type="text" class="form-control" name="number" placeholder="Phone number">
+               </div>
+               <div>
+                 <label class="form-label">GitHub: </label>
+                 <input type="text" class="form-control" name="github" placeholder="GitHub link">
+               </div>
+               <div>
+                 <label class="form-label">Linkedin: </label>
+                 <input type="text" class="form-control" name="linkedin" placeholder="Linkedin link">
+               </div>
+               <button type="submit" class="btn btn-primary mt-2">Sign up</button>
+          </form>
+       </div>
+    </div>
+
+
+<script>
+     const form = document.querySelector('form')
+
+     const emailError = document.querySelector('.email.error')
+     const passwordError = document.querySelector('.password.error')
+   
+
+    
