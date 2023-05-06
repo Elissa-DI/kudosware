@@ -49,4 +49,46 @@ module.exports.resume_get = (req, res) => {
 
 module.exports.signup_post= async (req, res) => {
     
+    const { fname, lname, email, password, number, github, linkedin } = req.body;
+     try {
+          const user = await User.create({fname,lname,email,password,number,github,linkedin})
+          const token = createToken(user._id);
+          res.cookie('jwt',token, {httpOnly:true, maxAge:maxAge * 1000})
+          res.status(201).json({user: user._id})
+      
+     } catch (err) {
+          const errors = handleErrors(err)
+          res.status(400).json({errors})          
+     }
+     
+}
+
+module.exports.login_post = async (req,res) => {
+     const { email, password } = req.body
+
+      try {
+        const user = await User.login(email,password);
+        
+        const token = createToken(user._id);
+        res.cookie('jwt',token, {httpOnly:true, maxAge:maxAge * 1000})
+        
+        res.status(200).json({ user: user._id})
+      }  catch (err) {
+
+          const errors = handleErrors(err)
+     
+       res.status(400).json({errors});
+      }
  
+}
+
+
+module.exports.logout_get = (req,res) => {
+      res.cookie('jwt','', {maxAge:1});
+      res.redirect('/');
+}
+
+module.exports.resume_post = (req, res) => {
+     // const resume = req.body;
+     res.redirect('/resume');
+}
