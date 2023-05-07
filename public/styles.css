@@ -80,12 +80,6 @@ button{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
-.error{
-  color: #ff0099;
-  margin: 10px 2px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
 header{
   display: flex;
   align-items: center;
@@ -135,5 +129,20 @@ header .btn{
 footer{
   text-align: center;
   margin-top: 20px;
-  color: #aaa;
+  color: #716f6f;
+}
+
+#design{
+  /* float: left; */
+  height: 40%;
+  width: 47%;
+  background: url(design.png);
+  object-fit: cover;
+}
+#fullstack{
+  /* float: right; */
+  height: 40%;
+  width: 47%;
+  background: url(fullstack.jpg);
+  object-fit: cover;
 }
