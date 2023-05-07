@@ -137,6 +137,7 @@ footer{
   height: 40%;
   width: 47%;
   background: url(design.png);
+  background-size: cover;
   object-fit: cover;
 }
 #fullstack{
@@ -144,5 +145,6 @@ footer{
   height: 40%;
   width: 47%;
   background: url(fullstack.jpg);
+  background-size: cover;
   object-fit: cover;
 }
