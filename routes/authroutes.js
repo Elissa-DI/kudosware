@@ -14,6 +14,6 @@ router.get("/logout",authcontrollers.logout_get)
 
 router.get("/resumeAdd", authcontrollers.resume_get)
 
-router.post("/resume", authcontrollers.resume_post)
+// router.post("/resume", authcontrollers.resume_post)
 
 module.exports = router;
