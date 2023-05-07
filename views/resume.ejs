@@ -18,7 +18,7 @@
         <h5>Linkedin</h5>
         <!-- <a href="#" class="btn shadow">Go</a> -->
     </div>
-    <form action="resume">
+    <form action="resume" enctype="multipart/form-data">
     <div class="mt-3 d-flex justify-content-center">
         <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Upload Resume</button>
         <input type="file" id="fileInput" style="display: none"  required>
@@ -32,8 +32,32 @@
 </div>
 
 <script>
-  const resume = form.resume.value
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const resume = form.resume.files[0];
+
+    try {
+      const formData = new FormData();
+      formData.append('resume', resume);
+
+      const res = await fetch('/resume', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        console.log('Resume uploaded and inserted in the database');
+        location.assign('/');
+      } else {
+        console.log('Error uploading the resume');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
 </script>
+
 
 <%- include('partials/footer'); -%>
 
