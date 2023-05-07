@@ -1,75 +1,49 @@
 <%- include('partials/header'); -%>
-<!-- <form action="">
-     <h2>Login </h2>
-     <label for="email">Email</label>
-     <input type="text" name="email" required>
-     <div class="email error"></div>
+<div class="container d-flex justify-content-center" style="box-shadow: 0 0 2px black; height: 65vh; width: 80vw; padding: 30px;">
+  <form action="" method="POST" style="width:50vw; min-width:300px;">
+    <div>
+      <label class="form-label">Email:</label>
+      <input type="text" class="form-control" name="email" placeholder="name@example.com">
+    </div>
 
-     
-     <label for="password">password</label>
-     <input type="password" name="password" required>
-     <div class="password error"></div>
-     <button>Login</button>
-</form> -->
-     <div class="container-fluid">
-     <div class="container d-flex justify-content-center" style="box-shadow: 0 0 2px black; height: 65vh; width: 80vw; padding: 30px;">
-         <form action="" method="POST" style="width:50vw; min-width:300px;">
-     <div>
-         <label class="form-label">Email:</label>
-         <input type="text" class="form-control" name="email" placeholder="name@example.com">
-     </div>
-
-     <div>
-         <label class="form-label">Password: </label>
-         <input type="password" class="form-control" name="password" placeholder="Enter your Password">
-     </div>
-     <div class="password error"></div>
-     <button type="submit" class="btn btn-primary mt-5">Login</button>
- </form>
- </div>
+    <div>
+      <label class="form-label">Password:</label>
+      <input type="password" class="form-control" name="password" placeholder="Enter your Password">
+    </div>
+    <div class="error" style="color: red;"></div>
+    <button type="submit" class="btn btn-primary mt-5">Login</button>
+  </form>
 </div>
 
-
 <script>
-     const form = document.querySelector('form')
+  const form = document.querySelector('form');
+  const errorDiv = document.querySelector('.error');
 
-     const emailError = document.querySelector('.email.error')
-     const passwordError = document.querySelector('.password.error')
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorDiv.innerText = 'Incorrect email or password'; // Clear any previous error message
 
-     form.addEventListener('submit', async (e) => 
-     {
-          e.preventDefault()
+    const email = form.email.value;
+    const password = form.password.value;
 
-emailError.textContent=""
-passwordError.textContent =""
+    try {
+      const res = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await res.json();
 
+      if (data.error) {
+        errorDiv.innerText = 'Incorrect password or email'; // Display the error message
+      }
 
-const email = form.email.value
-
-const password = form.password.value
-
-try {
-     const res = await fetch('/login',{
-          method: 'POST',
-          body: JSON.stringify({email, password}),
-          headers: { 'Content-Type': 'application/json'}
-     })
-     const data = await res.json()
-     console.log(data)
-     if(data.errors) {
-        emailError.textContent = data.errors.email;
-        passwordError.textContent = data.errors.password
-     }
-
-     if(data.user) {
-          
-          location.assign ('/');
-     }
-
-}catch (err) {
-console.log(err)
-}
-
-     })
+      if (data.user) {
+        location.assign('/');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
 </script>
 <%- include('partials/footer'); -%>
